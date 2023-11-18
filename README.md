@@ -13,5 +13,3 @@ a.	What nations are the least frequent borrowers...
 2.	What nations are the biggest beneficiaries of IDA Grants?
 a.	Is there any inferences we can make based on their standing in the world geopolitical stage?
 3.	What is the outstanding balance of loans owed to the World Bank as of Nov 2023?
-   
-![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/cd7dfb0d-a19b-45b2-b0b4-69cfe7f9bb70)
