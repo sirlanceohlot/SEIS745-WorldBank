@@ -14,5 +14,5 @@ a.	What nations are the least frequent borrowers...
 a.	Is there any inferences we can make based on their standing in the world geopolitical stage?
 3.	What is the outstanding balance of loans owed to the World Bank as of Nov 2023?
 
-#Data Engineering Pipeline For Project
+# Data Engineering Pipeline For Project
 ![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/4eaa2467-6e36-440e-aaa1-60d57f1bb417)
