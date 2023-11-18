@@ -77,4 +77,15 @@ aws s3 cp zucq-nrc3.csv s3://${BUCKET_NAME}/
 # Storing IDA Dataset from World Bank in S3
 aws s3 cp ztdwh-3krx.csv s3://${BUCKET_NAME}/
 
+###############################################
+# START PYSPARK & THEN SHIFT OVER TO YOUR GUI #
+###############################################
+
+# Initiating PySpark
+pyspark
+
+#Next You will navigate to a page in your web browser
+#http://<EMR-Master-Public-DNS>:8888
+
+
 
