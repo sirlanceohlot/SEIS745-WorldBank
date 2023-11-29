@@ -7,9 +7,9 @@ This document will serve as a guide alongside the Project_Commands.Sh file for y
 # Pre-Requisites
 
 1.	This project requires you have an Amazon AWS Account provisioned either by yourself or accessible through your work/educational organization.
-a.	Amazon does offer a free tier for Amazon AWS which you can review at this URL: https://aws.amazon.com/free/?gclid=Cj0KCQiA35urBhDCARIsAOU7QwnRmvlhrCJ4Ne88MuAKm-42pZNZMv6XswFN2nx2rRxa0dbZCURkZlgaAhepEALw_wcB&trk=7541ebd3-552d-4f98-9357-b542436aa66c&sc_channel=ps&ef_id=Cj0KCQiA35urBhDCARIsAOU7QwnRmvlhrCJ4Ne88MuAKm-42pZNZMv6XswFN2nx2rRxa0dbZCURkZlgaAhepEALw_wcB:G:s&s_kwcid=AL!4422!3!651751058790!e!!g!!aws%20free%20tier!19852662149!145019243897&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all
+a.	Amazon does offer a free tier for Amazon AWS which you can review at this URL: https://go.aws/3Rmd3vB
 2.	Next, this project requires you set up a Cloud9 IDE environment within Amazon AWS to run the Project_Commands.sh file.
-a.	Amazon has an excellent walkthrough you can utilize to set up your Cloud9 environment at this URL: https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial.html.
+a.	Amazon has an excellent walkthrough you can utilize to set up your Cloud9 environment at this URL: https://bit.ly/3N5scQh
 
 # Environment Set Up
 
