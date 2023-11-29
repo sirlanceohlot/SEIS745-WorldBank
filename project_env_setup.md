@@ -2,7 +2,7 @@
 
 # Purpose
 
-This document will serve as a guide alongside the Project_Commands.Sh file for you to be able to reproduce the results demonstrated in this project in your own environment. 
+This document will serve as a guide alongside the Project_Commands.Sh file in this repository for you to be able to reproduce the results demonstrated in this project in your own environment. 
 
 # Pre-Requisites
 
