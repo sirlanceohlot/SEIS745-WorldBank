@@ -77,6 +77,13 @@ aws s3 cp zucq-nrc3.csv s3://your-s3-bucket-name-here/
 # Storing IDA Dataset from World Bank in S3
 aws s3 cp tdwh-3krx.csv s3://your-s3-bucket-name-here/
 
+###########################################
+# INSTALL PANDAS ON EMR CLUSTER           #
+###########################################
+# You can add the following step to install pandas
+aws emr add-steps --cluster-id ${PROJ_CLUSTER_ID} \
+  --steps Type=CUSTOM_JAR,Name="Install Pandas",ActionOnFailure=CONTINUE,Jar="command-runner.jar",Args=["sudo","pip","install","pandas"]
+
 ###############################################
 # START PYSPARK & THEN SHIFT OVER TO YOUR GUI #
 ###############################################
