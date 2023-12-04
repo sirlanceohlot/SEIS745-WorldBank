@@ -40,4 +40,5 @@ Once you have navigated to the http://<YOUR-EMR-Master-Public-DNS>:8888, you wil
 
 ![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/9ecd22bf-76be-46b2-838c-a7dde2abfa60)
 
+Now, it is time to start exploring the datasets we’ve created in our Amazon EMR Cluster.
 
