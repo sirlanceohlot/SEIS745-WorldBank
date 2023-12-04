@@ -32,11 +32,11 @@ It will take 15-20 minutes for the CloudFormation process to complete before you
 
 Data Preparation 
 
-After you have successfully executed all the sections of code from the project_commands.sh file, you will open a new tab in your web browser and navigate to, http://<YOUR-EMR-Master-Public-DNS>:8888, you will replace the text with your EMR Master Public DNS, this is located in your EC2 instance section for the EMR Cluster you have just started in Cloud9, you can see the circled section in the image below where you can find your Public DNS you’ll copy into the URL provided. 
+After you have successfully executed all the sections of code from the project_commands.sh file, you will open a new tab in your web browser and navigate to, http://YOUR-EMR-Master-Public-DNS:8888, you will replace the text with your EMR Master Public DNS, this is located in your EC2 instance section for the EMR Cluster you have just started in Cloud9, you can see the circled section in the image below where you can find your Public DNS you’ll copy into the URL provided. 
 
 ![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/058c998e-9151-496d-b699-a864f7790b8d)
 
-Once you have navigated to the http://<YOUR-EMR-Master-Public-DNS>:8888, you will be required to enter a username & password for your HUE, guided user interface (GUI).
+Once you have navigated to the http://YOUR-EMR-Master-Public-DNS:8888, you will be required to enter a username & password for your HUE, guided user interface (GUI).
 
 ![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/9ecd22bf-76be-46b2-838c-a7dde2abfa60)
 
