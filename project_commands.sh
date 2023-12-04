@@ -72,10 +72,10 @@ curl -OJL https://finances.worldbank.org/resource/tdwh-3krx.csv
 #############################################
 
 # Storing IBRD Dataset from World Bank in S3
-aws s3 cp zucq-nrc3.csv s3://${BUCKET_NAME}/
+aws s3 cp zucq-nrc3.csv s3://your-s3-bucket-name-here/
 
 # Storing IDA Dataset from World Bank in S3
-aws s3 cp ztdwh-3krx.csv s3://${BUCKET_NAME}/
+aws s3 cp tdwh-3krx.csv s3://your-s3-bucket-name-here/
 
 ###############################################
 # START PYSPARK & THEN SHIFT OVER TO YOUR GUI #
