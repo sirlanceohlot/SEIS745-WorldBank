@@ -42,3 +42,27 @@ Once you have navigated to the http://YOUR-EMR-Master-Public-DNS:8888, you will 
 
 Now, it is time to start exploring the datasets we’ve created in our Amazon EMR Cluster.
 
+This project is utilizing PySpark, so when you login to Hadoop User Experience (HUE), you will need to open the </> pane and select PySpark.
+
+![image](https://github.com/sirlanceohlot/SEIS745-WorldBank/assets/62031972/bcd6fc78-10db-4a99-95d7-50fe95a48b98)
+
+Now, you can execute the following commands below to get yourself set up to explore the data we have imported into our Hadoop Distributed File System.
+
+### Set up Spark Session
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import countDistinct
+
+### Initialize Spark session
+spark = SparkSession.builder.appName("DataPreparation").getOrCreate()
+
+### Read IDA CSV data into a DataFrame
+IDA_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/tdwh-3krx.csv", header=True, inferSchema=True)
+
+### Counting projects by country 
+IDA_country_count_df = IDA_df.groupBy("country").agg(countDistinct("project_id").alias("distinct_project_count"))
+
+### Sort in descending order
+IDA_country_count_df = IDA_country_count_df.orderBy("distinct_project_count", ascending=False)
+
+### Show the result
+IDA_country_count_df.show()
