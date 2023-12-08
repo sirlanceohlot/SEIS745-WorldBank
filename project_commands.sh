@@ -94,5 +94,10 @@ pyspark
 #Next You will navigate to a page in your web browser
 #http://<EMR-Master-Public-DNS>:8888
 
-
+############################################
+# DELETE PROJECT RESOURCES                 #
+############################################
+aws cloudformation delete-stack --stack-name "PROJ-emr-cluster-stack"
+aws ec2 delete-key-pair --key-name "${PROJ_KEY_NAME}"
+aws cloudformation wait stack-delete-complete --stack-name "PROJ-emr-cluster-stack"  
 
