@@ -104,7 +104,7 @@ from pyspark.sql import functions as F
 spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IBRD CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv", header=True, inferSchema=True)
+IBRD_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv", header=True, inferSchema=True)
 
 # Finding the total borrower_s_obligiation for IBRD loans
 IBRD_balance_df = IBRD_df.groupby("end_of_period","credit_status").agg(
