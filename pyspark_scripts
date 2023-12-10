@@ -22,7 +22,7 @@ IDA_by_country_df = IDA_by_country_df.orderBy("distinct_project_count", ascendin
 #IDA_by_country_df.show()
 
 #Saving IDA_by_country_df Dataframe in S3 as CSV file
-s3_output_path = "s3://your-s3-bucket-name/IDA_by_country_df.csv"
+s3_output_path = "s3://your-s3-bucket-name/IDA_by_country_df"
 IDA_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 
@@ -52,7 +52,7 @@ IBRD_by_country_df = IBRD_by_country_df.orderBy("distinct_project_count", ascend
 #IBRD_by_country_df.show()
 
 #Saving IBRD_by_country_df Dataframe in S3 as CSV file
-s3_output_path = "s3://your-s3-bucket-name"
+s3_output_path = "s3://your-s3-bucket-name/IBRD_by_country_df"
 IBRD_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 
@@ -92,7 +92,7 @@ IDA_balance_df_filtered = IDA_balance_df.filter(master_filter)
 IDA_balance_df_filtered.show()
 
 #Saving IDA_balance_df_filtered Dataframe in S3 as CSV file
-s3_output_path = "s3://your-s3-bucket-name/IDA_balance_df_filtered.csv"
+s3_output_path = "s3://your-s3-bucket-name/IDA_balance_df_filtered"
 IDA_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 /// next code snippet
@@ -131,7 +131,7 @@ IBRD_balance_df_filtered = IBRD_balance_df.filter(master_filter)
 IBRD_balance_df_filtered.show()
 
 #Saving IBRD_balance_df_filtered Dataframe in S3 as CSV file
-s3_output_path = "s3://your-s3-bucket-name/IBRD_balance_df_filtered.csv"
+s3_output_path = "s3://your-s3-bucket-name/IBRD_balance_df_filtered"
 IBRD_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 /// next code snippet
