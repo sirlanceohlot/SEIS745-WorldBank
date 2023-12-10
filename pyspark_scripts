@@ -4,10 +4,10 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 # Initialize Spark session
-spark = SparkSession.builder.appName("DataPreparation").getOrCreate()
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IDA CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/tdwh-3krx.csv", header=True, inferSchema=True)
+IDA_df = spark.read.csv("s3://your-s3-bucket/tdwh-3krx.csv", header=True, inferSchema=True)
 
 # Counting projects by country & summing their principal balance 
 IDA_by_country_df = IDA_df.groupBy("country").agg(
@@ -22,7 +22,7 @@ IDA_by_country_df = IDA_by_country_df.orderBy("distinct_project_count", ascendin
 #IDA_by_country_df.show()
 
 #Saving IDA_by_country_df Dataframe in S3 as CSV file
-s3_output_path = "s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/IDA_by_country_df"
+s3_output_path = "s3://your-s3-bucket/IDA_by_country_df"
 IDA_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 
@@ -34,10 +34,10 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 # Initialize Spark session
-spark = SparkSession.builder.appName("DataPrep").getOrCreate()
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IBRD CSV data into a DataFrame
-IBRD_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/zucq-nrc3.csv", header=True, inferSchema=True)
+IBRD_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv", header=True, inferSchema=True)
 
 # Counting projects by country & summing their principal balance 
 IBRD_by_country_df = IBRD_df.groupBy("country").agg(
@@ -52,7 +52,7 @@ IBRD_by_country_df = IBRD_by_country_df.orderBy("distinct_project_count", ascend
 #IBRD_by_country_df.show()
 
 #Saving IBRD_by_country_df Dataframe in S3 as CSV file
-s3_output_path = "s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/IBRD_by_country_df"
+s3_output_path = "s3://your-s3-bucket/IBRD_by_country_df"
 IBRD_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 
@@ -67,10 +67,9 @@ from pyspark.sql import functions as F
 spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
 
 # Read IDA CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/tdwh-3krx.csv", header=True, inferSchema=True)
+IDA_df = spark.read.csv("s3://your-s3-bucket/tdwh-3krx.csv", header=True, inferSchema=True)
 
 # Finding the total borrower_s_obligiation for IDA loans
-Will this so me the sum of the borrower_s_obligation column?
 IDA_balance_df = IDA_df.agg(
     F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
 )
@@ -92,7 +91,7 @@ IDA_balance_df_filtered = IDA_balance_df.filter(master_filter)
 IDA_balance_df_filtered.show()
 
 #Saving IDA_balance_df_filtered Dataframe in S3 as CSV file
-s3_output_path = "s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/IDA_balance_df_filtered"
+s3_output_path = "s3://your-s3-bucket/IDA_balance_df_filtered"
 IDA_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 /// next code snippet
@@ -106,10 +105,9 @@ from pyspark.sql import functions as F
 spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
 
 # Read IBRD CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/zucq-nrc3.csv"", header=True, inferSchema=True)
+IDA_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv"", header=True, inferSchema=True)
 
 # Finding the total borrower_s_obligiation for IBRD loans
-Will this so me the sum of the borrower_s_obligation column?
 IBRD_balance_df = IBRD_df.agg(
     F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
 )
@@ -131,7 +129,7 @@ IBRD_balance_df_filtered = IBRD_balance_df.filter(master_filter)
 IBRD_balance_df_filtered.show()
 
 #Saving IBRD_balance_df_filtered Dataframe in S3 as CSV file
-s3_output_path = "s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/IBRD_balance_df_filtered"
+s3_output_path = "s3://your-s3-bucket/IBRD_balance_df_filtered"
 IBRD_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
 
 /// next code snippet
@@ -145,7 +143,7 @@ from pyspark.sql import functions as F
 spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
 
 # Read IDA CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://s3-dle-acadbf36-f48e-4059-a004-1d0760a5ddd4/tdwh-3krx.csv", header=True, inferSchema=True)
+IDA_df = spark.read.csv("s3://your-s3-bucket/tdwh-3krx.csv", header=True, inferSchema=True)
 
 # Counting projects by region & summing their principal balance 
 IDA_by_country_df = IDA_df.groupBy("country").agg(
