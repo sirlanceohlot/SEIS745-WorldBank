@@ -1,0 +1,159 @@
+### IDA Project & Principal Balances by Country
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
+
+# Read IDA CSV data into a DataFrame
+IDA_df = spark.read.csv("s3://your-s3-bucket-name/tdwh-3krx.csv", header=True, inferSchema=True)
+
+# Counting projects by country & summing their principal balance 
+IDA_by_country_df = IDA_df.groupBy("country").agg(
+    F.countDistinct("project_id").alias("distinct_project_count"),
+    F.sum("original_principal_amount").alias("total_original_principal")
+)
+
+# Sort in descending order
+IDA_by_country_df = IDA_by_country_df.orderBy("distinct_project_count", ascending=False)
+
+# Show the result
+#IDA_by_country_df.show()
+
+#Saving IDA_by_country_df Dataframe in S3 as CSV file
+s3_output_path = "s3://your-s3-bucket-name/IDA_by_country_df.csv"
+IDA_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
+
+
+///next code snippet
+
+### IBRD Project & Principal Balances by Country
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+
+# Read IBRD CSV data into a DataFrame
+IBRD_df = spark.read.csv("s3://your-s3-bucket-name/zucq-nrc3.csv", header=True, inferSchema=True)
+
+# Counting projects by country & summing their principal balance 
+IBRD_by_country_df = IBRD_df.groupBy("country").agg(
+    F.countDistinct("project_id").alias("distinct_project_count"),
+    F.sum("original_principal_amount").alias("total_original_principal")
+)
+
+# Sort in descending order
+IBRD_by_country_df = IBRD_by_country_df.orderBy("distinct_project_count", ascending=True)
+
+# Show the result
+#IBRD_by_country_df.show()
+
+#Saving IBRD_by_country_df Dataframe in S3 as CSV file
+s3_output_path = "s3://your-s3-bucket-name"
+IBRD_by_country_df.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
+
+
+/// next code snippet
+
+### IDA Total Outstanding Balance Owed for Repaying & Disbursing&Repaying
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+
+# Read IDA CSV data into a DataFrame
+IDA_df = spark.read.csv("s3://your-s3-bucket-name/tdwh-3krx.csv", header=True, inferSchema=True)
+
+# Finding the total borrower_s_obligiation for IDA loans
+Will this so me the sum of the borrower_s_obligation column?
+IDA_balance_df = IDA_df.agg(
+    F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
+)
+
+# Filters for IDA_balance_df to find only the most recent loan records to sum
+date_filter = IDA_balance_df.filter(F.col("end_of_period") == "10/31/23 0:00")
+credit_status_filter_1 = IDA_balance_df.filter(F.col("credit_") == "Repaying")
+credit_status_filter_2 = IDA_balance_df.filter(F.col("credit_") == "Disbursing&Repaying")
+
+# Master filter to apply to IDA_balance_df
+
+master_filter = date_filter & credit_status_filter_1 & credit_status_filter_2
+
+
+# Finding the total borrower_s_obligiation for IDA loans by credit_status & end_of_period
+IDA_balance_df_filtered = IDA_balance_df.filter(master_filter)
+
+# Show the result
+IDA_balance_df_filtered.show()
+
+#Saving IDA_balance_df_filtered Dataframe in S3 as CSV file
+s3_output_path = "s3://your-s3-bucket-name/IDA_balance_df_filtered.csv"
+IDA_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
+
+/// next code snippet
+
+### IBRD Total Outstanding Balance Owed for Repaying & Disbursing&Repaying
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+
+# Read IBRD CSV data into a DataFrame
+IDA_df = spark.read.csv("s3://your-s3-bucket-name/zucq-nrc3.csv"", header=True, inferSchema=True)
+
+# Finding the total borrower_s_obligiation for IBRD loans
+Will this so me the sum of the borrower_s_obligation column?
+IBRD_balance_df = IBRD_df.agg(
+    F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
+)
+
+# Filters for IBRD_balance_df to find only the most recent loan records to sum
+date_filter = IBRD_balance_df.filter(F.col("end_of_period") == "10/31/23 0:00")
+credit_status_filter_1 = IBRD_balance_df.filter(F.col("credit_") == "Repaying")
+credit_status_filter_2 = IBRD_balance_df.filter(F.col("credit_") == "Disbursing&Repaying")
+
+# Master filter to apply to IDA_balance_df
+
+master_filter = date_filter & credit_status_filter_1 & credit_status_filter_2
+
+
+# Finding the total borrower_s_obligiation for IDA loans by credit_status & end_of_period
+IBRD_balance_df_filtered = IBRD_balance_df.filter(master_filter)
+
+# Show the result
+IBRD_balance_df_filtered.show()
+
+#Saving IBRD_balance_df_filtered Dataframe in S3 as CSV file
+s3_output_path = "s3://your-s3-bucket-name/IBRD_balance_df_filtered.csv"
+IBRD_balance_df_filtered.coalesce(1).write.csv(s3_output_path, header=True, mode="overwrite")
+
+/// next code snippet
+
+### IDA Project & Principal Balances by Region & Country
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+
+# Read IDA CSV data into a DataFrame
+IDA_df = spark.read.csv("s3://your-s3-bucket-name/tdwh-3krx.csv", header=True, inferSchema=True)
+
+# Counting projects by region & summing their principal balance 
+IDA_by_country_df = IDA_df.groupBy("country").agg(
+    F.countDistinct("project_id").alias("distinct_project_count"),
+    F.sum("original_principal_amount").alias("total_original_principal")
+)
+
+# Sort in descending order
+IDA_by_region_df = IDA_by_region_df.orderBy("distinct_project_count", ascending=False)
+
+IDA_by_region_df.show()
