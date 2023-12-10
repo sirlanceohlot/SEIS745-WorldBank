@@ -48,6 +48,8 @@ This project is utilizing PySpark, so when you login to Hadoop User Experience (
 
 Now, you can execute the following commands below to get yourself set up to explore the data we have imported into our Hadoop Distributed File System.
 
+If you would like more in depth scripts to follow, please open pyspark_scripts in the GitHub Repository.
+
 ### Set up Spark Session
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import countDistinct
