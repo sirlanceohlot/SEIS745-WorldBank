@@ -64,31 +64,30 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 # Initialize Spark session
-spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IDA CSV data into a DataFrame
 IDA_df = spark.read.csv("s3://your-s3-bucket/tdwh-3krx.csv", header=True, inferSchema=True)
 
 # Finding the total borrower_s_obligiation for IDA loans
-IDA_balance_df = IDA_df.agg(
+IDA_balance_df = IDA_df.groupby("end_of_period","credit_status").agg(
     F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
 )
 
 # Filters for IDA_balance_df to find only the most recent loan records to sum
-date_filter = IDA_balance_df.filter(F.col("end_of_period") == "10/31/23 0:00")
-credit_status_filter_1 = IDA_balance_df.filter(F.col("credit_") == "Repaying")
-credit_status_filter_2 = IDA_balance_df.filter(F.col("credit_") == "Disbursing&Repaying")
+date_filter = F.col("end_of_period") >= "2023-10-31"
+credit_status_filter_1 = F.col("credit_status") == "Repaying"
+credit_status_filter_2 = F.col("credit_status") == "Disbursing&Repaying"
 
 # Master filter to apply to IDA_balance_df
 
-master_filter = date_filter & credit_status_filter_1 & credit_status_filter_2
-
+master_filter = date_filter & (credit_status_filter_1 | credit_status_filter_2)
 
 # Finding the total borrower_s_obligiation for IDA loans by credit_status & end_of_period
 IDA_balance_df_filtered = IDA_balance_df.filter(master_filter)
 
 # Show the result
-IDA_balance_df_filtered.show()
+#IDA_balance_df_filtered.show()
 
 #Saving IDA_balance_df_filtered Dataframe in S3 as CSV file
 s3_output_path = "s3://your-s3-bucket/IDA_balance_df_filtered"
@@ -102,31 +101,28 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 # Initialize Spark session
-spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IBRD CSV data into a DataFrame
-IDA_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv"", header=True, inferSchema=True)
+IDA_df = spark.read.csv("s3://your-s3-bucket/zucq-nrc3.csv", header=True, inferSchema=True)
 
 # Finding the total borrower_s_obligiation for IBRD loans
-IBRD_balance_df = IBRD_df.agg(
+IBRD_balance_df = IBRD_df.groupby("end_of_period","credit_status").agg(
     F.sum("borrower_s_obligation").alias("current outstanding total (USD)")
 )
 
 # Filters for IBRD_balance_df to find only the most recent loan records to sum
-date_filter = IBRD_balance_df.filter(F.col("end_of_period") == "10/31/23 0:00")
-credit_status_filter_1 = IBRD_balance_df.filter(F.col("credit_") == "Repaying")
-credit_status_filter_2 = IBRD_balance_df.filter(F.col("credit_") == "Disbursing&Repaying")
+date_filter = F.col("end_of_period") >= "2023-10-31"
+credit_status_filter_1 = F.col("credit_status") == "Repaying"
+credit_status_filter_2 = F.col("credit_status") == "Disbursing&Repaying"
 
 # Master filter to apply to IDA_balance_df
 
-master_filter = date_filter & credit_status_filter_1 & credit_status_filter_2
+master_filter = date_filter & (credit_status_filter_1 | credit_status_filter_2)
 
 
 # Finding the total borrower_s_obligiation for IDA loans by credit_status & end_of_period
 IBRD_balance_df_filtered = IBRD_balance_df.filter(master_filter)
-
-# Show the result
-IBRD_balance_df_filtered.show()
 
 #Saving IBRD_balance_df_filtered Dataframe in S3 as CSV file
 s3_output_path = "s3://your-s3-bucket/IBRD_balance_df_filtered"
@@ -140,7 +136,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 # Initialize Spark session
-spark = SparkSession.builder.appName("Rename_To_Your_App"").getOrCreate()
+spark = SparkSession.builder.appName("Rename_To_Your_App").getOrCreate()
 
 # Read IDA CSV data into a DataFrame
 IDA_df = spark.read.csv("s3://your-s3-bucket/tdwh-3krx.csv", header=True, inferSchema=True)
